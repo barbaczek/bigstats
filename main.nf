@@ -14,5 +14,5 @@ workflow {
 	READ_DATA( input_ch, "$projectDir/scripts/import.R" )
 	LINEAR_REGRESSION( READ_DATA.out.dataset, "$projectDir/scripts/linear_regression.R", "linreg" )
 	K_NEAREST_NEIGHBOURS( READ_DATA.out.dataset, "$projectDir/scripts/knn.R", "knn" )
-  RANDOM_FOREST( READ_DATA.out.dataset, "$projectDir/scripts/random_forest", "randomforest" )
+        RANDOM_FOREST( READ_DATA.out.dataset, "$projectDir/scripts/random_forest", "randomforest" )
 }
