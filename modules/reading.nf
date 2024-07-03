@@ -4,7 +4,7 @@ process READ_DATA {
         label 'process_low'
 
         cpus   = 1
-    memory = 1.GB
+  memory = 1.GB
 
         publishDir "${params.outdir}/preprocess", mode: 'copy'
 
