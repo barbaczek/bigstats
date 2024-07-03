@@ -2,32 +2,31 @@ process RUNMODEL {
 
   tag "run: ${modeltype}"
 
-	cpus = params.max_cpus
-	memory = params.max_memory
+        cpus = params.max_cpus
+        memory = params.max_memory
 
-	publishDir "${params.outdir}/results/${modeltype}", mode: 'copy'
-    
-	container "${ workflow.containerEngine == 'singularity' ?
-	'library://lescailab/bigdata/bigdata-rstudio:1.4.0' :
-	'ghcr.io/lescai-teaching/bigdata-rstudio:1.4.0' }"
-    
-	input:
-	path dataset
-	path rscript
-	val  modeltype
+        publishDir "${params.outdir}/results/${modeltype}", mode: 'copy'
 
-	output:
-	path "*.rds", emit: model
-	path "*tsv", emit: tables
-	path "*.pdf", emit: plots
-	path "*.RData", emit: workspace
+        container "${ workflow.containerEngine == 'singularity' ?
+        'library://lescailab/bigdata/bigdata-rstudio:1.4.0' :
+        'ghcr.io/lescai-teaching/bigdata-rstudio:1.4.0' }"
 
-	script:
-	"""
+        input:
+        path dataset
+        path rscript
+        val  modeltype
+
+        output:
+        path "*.rds", emit: model
+        path "*tsv", emit: tables
+        path "*.png", emit: plots
+
+        script:
+        """
   Rscript $rscript \
-	$dataset \
-	${task.cpus} \
-	$modeltype
-	"""
+        $dataset \
+        ${task.cpus} \
+        $modeltype
+        """
 
 }
