@@ -10,7 +10,7 @@ cores  = args[2]
 output = args[3]
 
 writeLines('###READING INPUT DATA###')
-blood_pressure_data = read_tsv(input)
+blood_pressure_data = readRDS(input)
 
 writeLines('###SPLITTING DATA###')
 blood_pressure_data_split = initial_split(blood_pressure_data %>% 
